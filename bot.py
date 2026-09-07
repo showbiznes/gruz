@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands, tasks
-from datetime import datetime, time
-import pytz
+from datetime import datetime, time, timezone, timedelta
 import os
 
 # dotenv опционален — на хостинге переменные задаются через панель
@@ -14,8 +13,8 @@ except ImportError:
 TOKEN = os.getenv("DISCORD_TOKEN")
 CHANNEL_ID = int(os.getenv("CHANNEL_ID", "0"))
 
-# Московский часовой пояс
-MSK = pytz.timezone("Europe/Moscow")
+# Московское время UTC+3 (фиксированное смещение, без багов pytz)
+MSK = timezone(timedelta(hours=3))
 
 # Расписание оповещений (МСК)
 SCHEDULE = [
